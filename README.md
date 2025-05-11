@@ -6,83 +6,60 @@
 
 ## **Project Overview**
 
-This project demonstrates the development and deployment of a simple Node.js-based microservice application that integrates with a cloud-hosted MongoDB Atlas database. It is designed as part of the SIT737-2025 practical assessment task (Task 9.1P) to showcase a complete DevOps pipeline involving Docker containerisation, Kubernetes orchestration, and database connectivity in a microservice architecture.
+The purpose of this project is to show how a simple Node.js microservice application that uses MongoDB Atlas in the cloud is developed and deployed. It was a project created as a practical evaluation for SIT323/SIT737-2025 and demonstrates a complete DevOps workflow of Docker, Kubernetes, and database integration in a microservice model.
 
-The primary purpose of the application is to offer a user registration feature, enabling users to submit their name, email, password, and phone number, which are then securely stored in MongoDB. The project focuses on implementing persistent storage, environment-specific configuration via Kubernetes secrets, and containerised deployment for scalability and portability.
+The main objective of the application is to make the user registration process easy, users can enter their name, email, password and phone number, which are saved safely on MongoDB. One of the main things of the project is the integration of persistent storage, environment-specific configuration handled with Kubernetes secrets and containerised deployment configuration for increased scalability and portability.
 
-The key objectives include:
+The key objectives are:
+* To design a functional Node.js/Express backend with MongoDB integration.
+* To containerise the application using Docker.
+* To deploy the application to a Kubernetes cluster with service exposure via NodePort.
+* To secure sensitive credentials using Kubernetes secrets.
+* To verify CRUD functionality and MongoDB connectivity using a frontend registration form.
+* To ensure operational resilience through health checks and optional alerting.
 
-* Designing a functional Node.js/Express backend with MongoDB integration.
-
-* Containerising the application using Docker.
-
-* Deploying the application to a Kubernetes cluster with service exposure via NodePort.
-
-* Securing sensitive credentials using Kubernetes secrets.
-
-* Verifying CRUD functionality and MongoDB connectivity using a frontend registration form.
-
-* Ensuring operational resilience through health checks and optional alerting.
-
-This repository contains all essential configuration files, including `Dockerfile`, `docker-compose.yaml`, deployment manifests, and documentation for reproducing the setup from scratch.
-
+This set of configuration files includes `Dockerfile`, `docker-compose.yaml`, configuration manifests (e.g., deployment manifests), and complete documentation to recreate the environment from scratch.
 
 
 ## **Tools and Technologies**
 
-This project utilises a modern cloud-native toolset to develop, deploy, and manage a scalable microservice application. Each technology serves a critical function in ensuring performance, reliability, and maintainability.
+For the development, deployment and management of a scalable microservice application, a cloud-native toolset is used in this project. Every technology factor in to ensure optimal performance, reliability, and ease of maintenance.
 
-* **Node.js**: Node.js serves as the core backend framework for the registration application. Its non-blocking, event-driven architecture is well-suited for handling I/O operations like database interactions. Express.js is used to simplify routing and middleware integration for building RESTful APIs.
+* **Node.js**: Node.js sits at the heart of the registration application’s backend architecture. The ability of Node.js to act in a non-blocking and event-driven form makes it suitable for the efficient undertaking of I/O functions such as database transactions. Express.js makes the development of RESTful APIs easier because it manages the route mapping and largely takes care of the configuration of middleware.
 
-* **MongoDB Atlas**: This fully-managed NoSQL cloud database provides flexible document storage. It allows the application to store and retrieve user registration data without managing infrastructure. Atlas also offers scalability, performance monitoring, and integrated security features.
+* **MongoDB Atlas**: This cloud-based NoSQL database can flexibly store document-based information. Atlas automates the tasks related to infrastructure, which means that the application can concentrate on processing the information about the user’s registration. Atlas allows flexibility in scaling, incorporation performance monitoring capabilities, and incorporates security measures.
 
-* **Docker**: Docker ensures application portability by packaging the backend, dependencies, and environment into isolated containers. This eliminates the “it works on my machine” issue and simplifies deployment across various platforms.
+* **Docker**: Docker allows for application portability through packaging the backend and dependencies, and the environment inside individual isolated containers. This normalises performance across environments and makes it easy to deploy the service on multiple platforms.
 
-* **Kubernetes**: Kubernetes manages containerised applications at scale. It handles deployment, service discovery, and automatic restarts through declarative manifests. The application is exposed via NodePort for browser access.
+* **Kubernetes**: Thanks to Kubernetes, containerised applications are effectively managed, scaled, and deployed on a large scale. Declarative manifests set the path of deployment, service discovery, and auto-restarts. Via a NodePort service, Browser users are able to access the application.
 
 * **MongoDB Compass / Mongosh**: These tools allow developers to visually inspect or interact with the MongoDB database. They are essential for verifying data insertion, structure, and connectivity.
 
 * **GitHub**: GitHub serves as the version control platform to host all code and configuration files, enabling collaboration, documentation, and submission tracking.
 
 
-
 ## **Folder Structure**
 
 The project is organised to reflect a standard Node.js web application structure integrated with Kubernetes and Docker configurations. This layout promotes modularity, reusability, and ease of deployment.
-
+```
 .
 
 ├── node_modules/                # Node.js dependencies
-
 ├── public/                     # Static frontend files
-
 │   ├── index.html              # HTML form for registration
-
 │   ├── script.js               # JavaScript for client-side logic
-
 │   └── style.css               # Styling for the form
-
 ├── Screenshots/               # Screenshots used for documentation
-
 ├── .env                       # Environment variables (excluded from GitHub)
-
 ├── app-deployment.yaml       # Kubernetes Deployment & Service
-
 ├── application.js            # Main server logic and DB integration
-
 ├── docker-compose.yaml       # Optional local Docker Compose file
-
 ├── Dockerfile                # Docker instructions to containerise app
-
 ├── mongo-secret.yaml         # Kubernetes Secret for MongoDB URI
-
 ├── package.json              # Node.js dependencies and scripts
-
 ├── package-lock.json         # Dependency lockfile
-
-
+```
 This structure helps separate concerns across different layers—UI, server logic, environment configurations, deployment artifacts, and documentation.
-
 
 
 ## **MongoDB Atlas Setup and Integration (with MongoDB Compass)**
@@ -97,8 +74,8 @@ The process began by visiting MongoDB Atlas and creating a free-tier account. On
 
 ### Step 2: Creating a Free Cluster
 
-Inside the new project, we created a Free M0 Cluster by selecting AWS as the cloud provider and ap-southeast-2 (Sydney) as the region for optimized latency.
-This cluster provides 512 MB storage and a replica set with 3 nodes, sufficient for testing and development purposes.
+Inside the new project, we created a Free M0 Cluster by selecting AWS as the cloud provider and ap-southeast-2 (Sydney) as the region for optimised latency.
+This cluster provides 512 MB storage, and a replica set with 3 nodes, sufficient for testing and development purposes.
  
 ![alt text](/Screenshots/Cluster%20Created.jpg)
 
@@ -127,7 +104,7 @@ This URI was added to Kubernetes as a secret using mongo-secret.yaml:
 
 ```
 stringData:
-  MONGO_URI: "mongodb+srv://appuser:apppassword123@cluster123.2ldn7g1.mongodb.net/registerdb?retryWrites=true&w=majority"
+     MONGO_URI: "mongodb+srv://appuser:apppassword123@cluster123.2ldn7g1.mongodb.net/registerdb?retryWrites=true&w=majority"
 ```
 
 By using secrets, sensitive credentials were kept out of the public Docker image and configuration files, ensuring security and modularity in our deployment.
@@ -144,7 +121,6 @@ Using MongoDB Atlas removed the complexity of self-managing databases within Kub
 This setup allowed the registration microservice to seamlessly connect to registerdb, persist user data, and provide reliable backend support—laying a solid foundation for scalable and secure deployments.
 
 ![alt text](/Screenshots/DatabaseMongosh.png)
-
 
 ## **Step-by-Step Process**
 
@@ -168,7 +144,6 @@ In `application.js` User schema and model is typically used to define the Mongoo
 
 ![alt text](Screenshots/LocalHost:3000.png)
 
-
 ### Step 2: Prepare Environment Variables
 
 Use environment variables to manage sensitive configurations like the MongoDB connection string.
@@ -181,9 +156,9 @@ MONGO_URI=mongodb+srv://appuser:apppassword123@cluster123.2ldn7g1.mongodb.net/re
 PORT=3000
 ```
 
-### Step 3: Dockerize the Application
+### Step 3: Dockerise the Application
 
-Use Docker to containerize the app, ensuring consistency across all environments.
+Use Docker to containerise the app, ensuring consistency across all environments.
 
 Create a `Dockerfile`:
 
@@ -206,7 +181,6 @@ docker push 222093271/registration-app:latest
 ![alt text](/Screenshots/Docker%20Image.png)
 
 ![alt text](/Screenshots/Docker%20Hub.png)
-
 
 ### Step 4: Create MongoDB Secret in Kubernetes
 
@@ -246,9 +220,8 @@ metadata:
   namespace: default
   resourceVersion: "14658"
   uid: 9a49f628-81b4-4017-b385-4b2c3d2428c1
-type: Opaque
+type: Opaque
 ```
-
 
 ### Step 5: Kubernetes Deployment and Service
 
@@ -307,7 +280,6 @@ kubectl apply -f app-deployment.yaml
 
 ![alt text](/Screenshots/Kubectl%20Logs.png)
 
-
 ### Step 6: Test and Verify Application
 
 Once deployed:
@@ -319,7 +291,6 @@ Once deployed:
 ![alt text](/Screenshots/Frontend.jpg)
 
 ![alt text](/Screenshots/Mongodb%20Compass.png)
-
 
 ## **Testing CRUD Operations and Setting Up Backups**
 
@@ -378,7 +349,6 @@ The deletion was validated as the document no longer appeared in query results.
 
 ![alt text](/Screenshots/DeleteDB.jpg)
 
-
 ### Step 2: Setting Up Database Backups and Disaster Recovery
 
 Although MongoDB Atlas Free Tier (M0) does not support automated backups, best practices and preparedness were still applied:
@@ -417,7 +387,6 @@ If you downloaded the ZIP:
 
     * Click OK to save
 
-
 ### Manual Backup Strategy (For Free Tier)
 
 ![alt text](/Screenshots/Cluster-FreeTier.jpg)
@@ -442,7 +411,6 @@ mongoimport --uri "mongodb+srv://appuser:apppassword123@cluster123.2ldn7g1.mongo
 
 ![alt text](/Screenshots/UserCOllection.png)
 
-
 ### Disaster Recovery Measures
 
 * **Secrets Managed via Kubernetes**: The MongoDB URI is stored as a Kubernetes secret (mongodb-uri-secret.yaml) to allow seamless recovery or redeployment
@@ -452,7 +420,6 @@ mongoimport --uri "mongodb+srv://appuser:apppassword123@cluster123.2ldn7g1.mongo
 * **GitHub Repository**: Acts as the single source of truth for app logic, Dockerfiles, and YAMLs
 
 These practices ensure that in the event of a failure, the application can be re-deployed with the same state and data restored using backups.
-
 
 ## **Monitoring and Health Checks**
 
@@ -479,18 +446,17 @@ readinessProbe:
   failureThreshold: 3
 ```
 
-* **Liveness Probe** ensures that the application is not stuck or unresponsive. If the check fails three consecutive times, Kubernetes restarts the container.
+Liveness Probe: It verifies that the application is never stuck or dead. If the check fails three times consecutively, Kubernetes is going to restart the container.
 
-* **Readiness Probe** ensures the application is ready to accept traffic. Until the check succeeds, the pod is excluded from the service endpoint list.
+Readiness Probe: It attests that this is the status of the application with respect to receiving and serving requests. The pod stays outside of the service endpoint list until the check succeeds.
 
-This mechanism maintains high availability and resilience of the application within the Kubernetes cluster.
+This way, the application will always be highly available and resilient in the Kubernetes cluster.
 
 ![alt text](/Screenshots/HealthChecks.png)
 
-
 ### MongoDB Atlas Monitoring
 
-MongoDB Atlas provides a comprehensive dashboard to monitor the health of the hosted registerdb cluster. The "Metrics" tab gives real-time performance graphs categorized by nodes, covering key aspects like connections, operation throttling, throughput, query execution, and command activity.
+MongoDB Atlas delivers a wide range of dashboards for monitoring the health of your hosted `registerdb` cluster. On the “Metrics” tab, users get live graphs that are ordered by nodes, also showing highly important details, such as connection activity, throttled operations, data throughput, query execution, and command operations.
 
 ![alt text](/Screenshots/AtlasMetrics.jpg)
 
@@ -498,38 +464,35 @@ MongoDB Atlas provides a comprehensive dashboard to monitor the health of the ho
 
 ![alt text](/Screenshots/Insert-Query-Command.jpg)
 
-![alt text](</Screenshots/Update-Delete.jpg)
+![alt text](/Screenshots/Update-Delete.jpg)
 
 ![alt text](/Screenshots/ClusterOverview.jpg)
 
-These visualisations are critical for identifying performance bottlenecks, abnormal spikes, or unexpected downtimes. For instance, the connections graph reveals the number of simultaneous database clients, which helps in evaluating scalability needs. Similarly, the operation throttling chart shows whether the cluster is hitting usage limits.
+These visualisations are essential in identifying performance deficiencies, detecting non-analogous increases in the load, or indicating unanticipated system failure. An example is the connections graph, which tells the number of simultaneous database clients, an indicator for analysis of scalability requirements. Similarly, the operation throttling chart can show whether the cluster has arrived at the boundaries of usage.
 
 ### Alert Configuration in MongoDB Atlas
 
-MongoDB Atlas provides built-in alerting functionality to monitor key events and system health. In this project, an alert was configured under the Cloud Backup category to notify users when the "Backup Compliance Policy has been completed". This ensures that the team receives immediate updates via email whenever backup tasks are successfully executed. Such alerts are critical for ensuring data integrity, enabling quick disaster recovery planning, and maintaining compliance with organisational or regulatory standards.
+MongoDB Atlas provides inherent alerting capability that can enable you to monitor crucial system events and performance. For this project, an alert was established in the Cloud Backup to notify the users as soon as " Backup Compliance policy has been met”. An email alert occurs as soon as any successful completion of backup tasks occurs in real time. Such alerts are fundamental to the protection of data integrity, supporting the rapid disaster recovery strategies and the need to follow organisational or regulatory requirements.
 
 ![alt text](/Screenshots/ClusterAlert.png)
 
-
 ### Monitoring Usefulness
 
-By combining Kubernetes health checks with Atlas performance metrics, the application gains:
+The usage of Kubernetes health checks plus Atlas performance metrics increases the value for the application in that:
 
 * **Early issue detection**: Downtime or backend crashes are automatically rectified via liveness checks.
 
 * **Visibility into usage trends**: Traffic and command volume trends support better resource allocation decisions.
 
-* **Database insight**: Read/write latencies, query rates, and cluster resource utilisation guide optimization strategies.
+* **Database insight**: Read/write latencies, query rates, and cluster resource utilisation guide optimisation strategies.
 
 These combined tools not only ensure application stability but also provide developers and system administrators with actionable insights to plan for scale, improve reliability, and react to issues swiftly.
 
-
 ## **Final GitHub Submission**
 
-We host all project files in GitHub to enable version control, collaboration, and transparent submission. It ensures reproducibility, allows instructors to verify code, configurations, and documentation, and supports CI/CD pipelines if extended. GitHub serves as a centralized, accessible, and verifiable source for all components of the deployment workflow.
+We host all project files in GitHub to enable version control, collaboration, and transparent submission. It ensures reproducibility, allows instructors to verify code, configurations, and documentation, and supports CI/CD pipelines if extended. GitHub serves as a centralised, accessible, and verifiable source for all components of the deployment workflow.
 
 ![alt text](/Screenshots/GithubSubmission.png)
-
 
 ## **Conclusion**
 
@@ -539,7 +502,7 @@ In conclusion, this project successfully demonstrates the development, container
 
 * **MongoDB Atlas** offers a flexible and scalable NoSQL backend with integrated performance monitoring and automated backups.
 
-* **Docker** is used to containerize the entire application, ensuring consistency across development, testing, and deployment environments.
+* **Docker** is used to containerise the entire application, ensuring consistency across development, testing, and deployment environments.
 
 * **Kubernetes** orchestrates deployment, load balancing, health checks, and service exposure using `NodePort`.
 
