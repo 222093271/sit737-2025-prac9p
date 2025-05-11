@@ -496,24 +496,23 @@ We host all project files in GitHub to enable version control, collaboration, an
 
 ## **Conclusion**
 
-In conclusion, this project successfully demonstrates the development, containerisation, deployment, and monitoring of a full-stack Node.js registration application connected to a MongoDB Atlas database within a Kubernetes environment. It integrates modern DevOps principles with cloud-native application deployment workflows, resulting in a production-ready, scalable, and observable microservice.
+In conclusion, this project successfully demonstrates the development, containerisation, deployment, and monitoring of a full-stack Node.js registration application connected to a MongoDB Atlas database within a Kubernetes environment. By combining DevOps methodologies with cloud-native applications deployment, this platform delivers a microservice that is scalable, observable and enterprise-ready.
 
-* The **Node.js application** provides a responsive registration interface and interacts with the `registerdb` database securely via Mongoose.
+*	The Node.js application provides a responsive registration interface and interacts with the `registerdb` database securely via Mongoose.
 
-* **MongoDB Atlas** offers a flexible and scalable NoSQL backend with integrated performance monitoring and automated backups.
+*	**MongoDB Atlas** enables a very flexible NoSQL storage solution that makes it possible to do real-time performance analysis and automatic backups.
 
-* **Docker** is used to containerise the entire application, ensuring consistency across development, testing, and deployment environments.
+*	**Docker** allows for enclosing the whole application in containers so that there is no change of environment during development, testing, and stages of deployment.
 
-* **Kubernetes** orchestrates deployment, load balancing, health checks, and service exposure using `NodePort`.
+*	Deployment is managed by **Kubernetes** configures load balancing, service health and enables service exposure using `NodePort`.
 
-* The application utilises **Secrets Management** to secure database credentials and `.env` variables, preserving confidentiality and integrity in cloud deployments.
+*	**Secrets Management** is used to protect database credentials and `.env` variables to keep the secrets secret and safe when deployed in the cloud.
 
-* **Health probes** (liveness/readiness) ensure continuous availability and reliability of the service.
+*	**Health probes** (liveness/readiness) ensure continuous availability and reliability of the service.
 
-* Comprehensive **monitoring dashboards** from MongoDB Atlas allow for performance inspection at the replica set, query, and operation level.
+*	With **MongoDB Atlas**, it is possible for users to use detailed monitoring dashboards to examine replica set, query, and operation performances.
 
-This project reflects an understanding of real-world software delivery pipelines and cloud infrastructure management. It simulates how scalable microservices are built, connected to cloud-managed databases, and deployed with automation and observability.
-
-The inclusion of detailed documentation, structured code organisation, YAML configuration files, and version-controlled assets in GitHub ensures that the project can be easily reused, improved, or scaled by any team. Future improvements could include enabling continuous deployment (CI/CD) using GitHub Actions, integrating unit tests, or deploying in a managed Kubernetes environment like GKE or EKS.
+This project is essentially the knowledge of actual software delivery workflows and management of cloud infrastructure. This project is an example to show the process of how scalable microservices are built, connected to a cloud database, and an automated deployment and observability feature are incorporated.
+Even with the ease in adapting and upgrading and scaling the project, thanks to well-documented data, modular coding, YAML environment setups, and version-controlled files in GitHub, the project is simply adaptable, upgradeable, and therefore scalable for any team. Future updates could include creating continuous deployment with GitHub Actions or including unit tests or migrating deployment to managed Kubernetes services like GKE or EKS.
 
 *📌 This GitHub repository serves as both the working directory and deployment blueprint for the registration application.*
